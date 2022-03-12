@@ -162,9 +162,9 @@ app.get('/getproducts-count',(req, res) =>
     Product.belongsTo(User,{constraints: true, onDelete:'CASCADE'});
     User.hasMany(Product);
     User.hasOne(Cart);
+    Cart.belongsTo(User);
     Order.belongsTo(User,{constraints: true, onDelete:'CASCADE'});
     User.hasMany(Order);
-    Cart.belongsTo(User);
     Cart.hasMany(Order);
     Order.belongsTo(User,{constraints: true, onDelete:'CASCADE'});
     Cart.belongsToMany(Product, {through:CartItem});
