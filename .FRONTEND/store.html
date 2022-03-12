@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Website</title>
+    <link rel="stylesheet" href="e-comm.css">
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.0/axios.min.js'></script>
+
+    <script src="e-comm.js" defer></script>
+
+</head>
+<body>
+    <header class="header">
+<nav class="navig">
+<ul class="ulClass">
+    <li class="li"><a href="home.html">HOME</a></li>
+    <li class="li"><a class="active" href="store.html">STORE</a></li>
+    <li class="li"><a href="about.html">ABOUT</a></li>
+</ul>
+</nav>
+<button id="order_btn"><a href="orders.html" > ORDERS</a></button>
+<button class="h-cart" id="hCart">CART</button>
+
+    <div class="div1">
+        <h1> The Generics</h1>
+    
+    </div>
+</header>
+    <main id="main">
+        <section class="cart-items" id="cartItems">
+            <div id="cart-popup">
+                <h3>CART</h3>
+                <button id="close">X</button>
+                <div class="columns">
+                    <span class="column">ITEM </span>
+                    <span class="column">PRICE</span>
+                    <span class="column">QUANTITY</span>
+                </div>
+                <div id="cart_products"></div>
+                <button class="cart" id="purchase">PURCHASE</button>
+            </div>
+        </section>
+        <h3>MUSIC</h3>
+         <div class="div2" id="products">
+           <!-- <div class="div3">
+                <h4>ALBUM 1</h4>
+                <img src="music1.jpg" alt="">
+                    <h5>$20.9</h5>
+                    <button class="btn-cart">ADD TO CART</button>
+            </div>
+            <div class="div3">
+                <h4>ALBUM 2</h4>
+                <img src="music2.jpg" alt="">
+                    <h5>$20.9</h5>
+                    <button class="btn-cart">ADD TO CART</button>
+            </div>
+            <div class="div3" >
+                <h4>ALBUM 3</h4>
+                <img src="music3.jpg" alt="">
+                    <h5>$20.9</h5>
+                    <button class="btn-cart">ADD TO CART</button>
+            </div>
+            <div class="div3">
+                <h4>ALBUM 4 </h4>
+                <img src="music4.jpg" alt="">
+                <h5>$20.9</h5>
+                <button class="btn-cart">ADD TO CART</button>
+            </div>
+        </div> -->
+        <!-- <h3>MERCH</h3>
+        <div class="div11">
+            <div class="div12">
+                <h4>T-shirt </h4>
+                <img src="merch1.jpg" alt="">
+                    <h5>$20.9</h5>
+                    <button class="btn-cart">ADD TO CART</button>
+            </div>
+            <div class="div12">
+                <h4 >Coffee Cup</h4>
+                <img src="merch2.jpg" alt="">
+                    <h5>$20.9</h5>
+                    <button class="btn-cart">ADD TO CART</button>
+            </div> -->
+        </div>   
+        <button class="cart"> see the cart</button>
+        <section id="pageview">
+
+        </section>
+    </main>
+    <footer class="footer">
+        <h1>The Generics</h1>
+        <div class="div13">
+            <ul class="ul-class2">
+                <li class="li-class">
+                    <a href="https://www.youtube.com"><img src="youtubelogo.jpg" class="img"></a>
+                    <li class="li-class">
+                        <a href="https://www.spotify.com"><img src="Spotify Logo.png" class="img"></a>
+                    </li>
+                    <li class="li-class">
+                        <a href="https://www.facebook.com"><img src="Facebook Logo.png" class="img"></a>
+                    </li>
+                </li>
+            </ul>
+        </div>
+    </footer>
+</body>
+</html>
+
+

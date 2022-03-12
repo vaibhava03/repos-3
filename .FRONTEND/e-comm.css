@@ -1,0 +1,398 @@
+@import url('https://fonts.googleapis.com/css2?family=Rye&display=swap');
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0; 
+}
+
+ body{
+    justify-content: center;
+
+ } 
+      /*----------------HEADER-------------------*/
+.header{
+
+    text-align: center;
+    margin:0;
+    width:100%;
+    color:white;
+    border-bottom:0.1rem solid white;
+}
+
+.ulClass{
+    position:fixed;
+    display:flex;
+    padding:10px;
+    list-style-type: none;
+    justify-content: center;
+    font-size: 20px;
+    background-color:#210a30;
+    width:100%;
+}
+
+.li{
+    padding:5px;
+    color:white;
+    align-self: center;
+    list-style: none;
+    width:200px;
+}
+
+.li a.active
+{
+    text-decoration: underline white 3px;
+}
+
+.h-cart{
+    background:rgb(75, 44, 97);
+    position:fixed;
+    text-decoration: none;
+    top: 10px;
+    right:10px;
+    width:70px;
+    height:30px;
+    border-color: white;
+    border-radius: 10px;
+    list-style: none;
+    color:white;
+    font-size:inherit;
+}
+a{
+    text-decoration: none;
+    color:white;
+}
+.div1{
+
+    padding:50px;
+    background-color: rgb(103, 90, 121);
+    color:white;
+    text-align: center;
+    font-size:50px;
+}
+.div22{
+    background-color: rgb(103, 90, 121);
+    color:white;
+    text-align: center;
+    height:150px;
+}
+.btn-album{
+
+    border: 1px solid #401a47;
+    padding: 15px 30px;
+    font-size: 23px;
+    font-weight: 200;
+    background: inherit;
+    cursor: pointer;
+    color: white;
+}
+.btn-play{
+    border-radius: 50%;
+    font-size: 50px;
+    padding:9px;
+    color:#401a47;
+    margin: 10px auto;
+    cursor: pointer;
+    display: block;
+}
+#order_btn{
+    background:rgb(75, 44, 97);
+    position:fixed;
+    text-decoration: none;
+    top: 10px;
+    right:100px;
+    width:70px;
+    height:30px;
+    border-color: white;
+    border-radius: 10px;
+    color:white;
+}
+.cart-items{
+    top: 50px;
+    right:0px;
+    width:25%;
+    height:100%;
+   position:-webkit-sticky;
+   position:absolute;
+
+    background-color: white;
+    display:none;
+}
+
+#cart-popup.active{
+    display:block;
+}
+
+#cart-popup{
+    text-align: center;
+    top:0%;
+    width:100%;
+    height:inherit;
+    position:relative;
+    background-color: inherit;
+}
+#close{
+    position:-webkit-sticky;
+    position:absolute;
+    top: 10px;
+    right:10px;
+    width:25px;
+    height:30px;
+    border-radius: 5px;
+    color:rgb(5, 5, 5);
+    font-size:inherit;
+}
+
+/*---------------------------MAIN---------------------------*/
+
+
+main{
+    text-align: center;
+    margin:0;
+    width:100%;
+}
+h3{
+    text-align: center;
+    padding-top:30px;
+    font-family: Rye;
+    font-size: 30px;
+}
+
+.div2{
+   display: flex;
+   flex-wrap:wrap;
+   justify-content: space-around;
+}
+.div3{
+        margin: 30px;
+        margin-top: 30px;
+        margin-right: 30px;
+        margin-bottom: 30px;
+        margin-left: 30px;
+    }
+    
+
+img{
+    height: 300px;
+    width: 300px;
+}
+
+
+.div11{
+display: flex;
+flex-wrap:wrap;
+justify-content: space-around;
+}
+
+.div12
+{
+    margin: 30px;
+    margin-top: 30px;
+    margin-right: 30px;
+    margin-bottom: 30px;
+    margin-left: 30px;
+}
+
+.btn-cart{
+    background:rgb(132, 216, 164);
+    text-decoration: none;
+    top: 10px;
+    right:10px;
+    width:150px;
+    height:40px;
+    border-color: white;
+    border-radius: 10px;
+    color:white;
+    font-size:inherit;
+} 
+h4{
+    padding-top:10px;
+    padding-bottom:40px;
+    font-size: 22px;
+    font-family:Arial, Helvetica, sans-serif
+}
+h5{
+    padding-top:10px;
+    padding-bottom:10px;
+    font-size: 17px;
+}
+
+.cart{
+    background:rgb(13, 182, 194);
+    top: 10px;
+    right:10px;
+    width:150px;
+    height:40px;
+    border-color: white;
+    border-radius: 10px;
+    color:white;
+    font-size:inherit;
+}
+
+.about{
+    max-width: 900px;
+    margin: 0 auto;
+    font-size: 20px;
+
+    }
+
+.tours-div{
+padding-top: 30px;
+    }
+    
+    .tours{
+        display: flex;
+        margin: 0px auto;
+        max-width: 900px;
+        justify-content: center;
+        border-bottom:1px dashed black;
+    }
+    .date{
+        width:12%;
+    }
+    .place {
+        width:15%;
+        color:#777;
+    }
+    .add{
+        width:30%;
+        color:#777;
+    }
+
+    .tickets{
+        margin:10px;
+        width:auto;
+        border: 1px solid #401a47;
+        border-radius: 10px;
+        padding: 10px 30px;
+        font-size: 15px;
+        font-weight: 200;
+        background-color: #422e50;
+        cursor: pointer;
+        color: white;
+    }
+
+    .toast{
+        right:0px;
+        bottom:0px;
+        width:20%;
+        height:10%;
+        margin-right: 3%;
+        margin-bottom: 3%;
+        border-radius: 20px;
+        border: 1px solid black;
+        background-color: rgb(180, 199, 156);
+        position:fixed;
+    }
+    .columns{
+        display:flex;
+        padding:5%;
+    }
+    .column{
+        width:40%;
+        border-bottom: 1px solid black;
+    }
+    .purchaseItems{
+        display:flex;
+        padding:1%;
+        border-bottom: 1px solid black;
+        width:100%
+    }
+
+     .nameS{
+      padding-right:70px;
+    } 
+    .imageBox{
+        width:100px;
+        height:100px;
+    }
+
+    .priceS{
+        padding-right:70px;
+    }
+    #remove{
+        background-color: red;
+        color:white;
+        width:70px;
+        height:30px;
+        border-color: white;
+        border-radius: 10px;
+        margin-top:5px;
+        margin-left:10px;
+    }
+
+    #pageview{
+    display: flex;
+    justify-content: center;
+    }
+    .pagination{
+        text-align: center;
+      padding:2rem;
+      }
+      
+      .pagination .pageNum{
+      text-decoration: none;
+      color:#00695c;
+      padding:0.5rem;
+      border: 1px solid #00695c;
+      cursor:pointer;
+      }
+      
+      .pagination .pageNum:hover,
+      .pagination .pageNum:active
+      .paginationa.active{
+        background-color: #00695c;
+        color:white;
+      }
+    
+
+
+
+
+
+
+
+      /* ---------------ORDERS------------------------------- */
+      .orders_section{
+          padding:70px;
+      }
+/*-----------------------FOOTER-----------------------*/
+
+.footer{
+    display: flex;
+    margin-top: 40px;
+    padding: 20px;
+    color:white;
+    background-color: rgb(103, 90, 121);
+}
+
+p{
+font-family:Verdana, Geneva, Tahoma, sans-serif; 
+color:#777;
+padding-top: 20px;
+
+}
+.div13{
+    top: 10px;
+    right:10px;
+    width:200px;
+    height:auto;
+    margin-left: auto;
+}
+.ul-class2{
+    display:flex;
+    padding:10px;
+    list-style-type: none;
+    justify-content: center;
+    font-size: 20px;
+}
+.li-class{
+   width:40px;
+   height:40px;
+   padding:2px;
+}
+.img{
+    object-fit: contain;
+    height:100%;
+    width:100%
+}
