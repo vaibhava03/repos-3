@@ -41,6 +41,7 @@ input{
     border-radius:10px;
     border-width: 3px;
     padding:6px;
+    margin-bottom: 10px;
 }
 #submit{
     width: 60%;
@@ -65,3 +66,34 @@ a{
   a:hover {
     color: rgb(0, 136, 34);
   }
+  .expense_div1{
+width:400px;
+height:300px;
+background-color: bisque;
+border: 2px solid black;
+border-radius: 20px;
+box-shadow: 2px 2px 2px rgb(148, 143, 143);
+margin: 5% auto;
+
+font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  }
+
+ #expenseForm{
+    padding:15px;
+ }
+ select{
+     background-color: rgb(235, 184, 90);
+     padding:5px;
+     border-radius: 5px;
+     color:darkolivegreen
+ }
+ select:hover{
+     background-color: azure;
+     color:black;
+ }
+ h3{
+     padding:9px;
+     margin-left:25%;
+     font-family: rye;
+     color:rgb(80, 35, 35);
+ }
