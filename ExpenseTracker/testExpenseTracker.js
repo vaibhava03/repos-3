@@ -6,8 +6,7 @@
    const Sequelize= require('sequelize');
    const bcrypt = require('bcrypt');
    const dotenv=require('dotenv');
-const { getMaxListeners } = require('process');
-const { default: axios } = require('axios');
+   const jwt = require('jsonwebtoken');
    dotenv.config({ path: path.resolve(__dirname, 'util/.env') })
 
    app.use(cors());
@@ -41,7 +40,8 @@ const { default: axios } = require('axios');
       }
 );
 
-   app.post('/getusers', (req, res) =>{
+
+   app.post('/user/signup', (req, res) =>{
       User.findOne({where:{email:req.body.email}})
       .then(user =>{
          if(!user){
@@ -49,7 +49,7 @@ const { default: axios } = require('axios');
          }
          else {
 
-            app.get('/getusers', (req, res) =>{
+            app.get('/user/signup', (req, res) =>{
             res.json(false);
             });
             return user;
@@ -60,7 +60,7 @@ const { default: axios } = require('axios');
          return bcrypt.genSalt()
          }
          else {
-            app.get('/getusers', (req, res) =>{
+            app.get('/user/signup', (req, res) =>{
                res.json(false);
             })
             return null;
@@ -76,7 +76,7 @@ const { default: axios } = require('axios');
          password:hash
          })
          })
-         app.get('/getusers',(req, res) =>{
+         app.get('/user/signup',(req, res) =>{
             res.json(true);
          })
       }
@@ -87,6 +87,34 @@ const { default: axios } = require('axios');
    });
 });
 
+
+app.post('/user/login', (req, res) =>{
+   User.findOne({where:{email:req.body.email}})
+   .then(user =>{
+      bcrypt.compare(req.body.password, user.password, function(err, response) {
+         if (err) {
+            console.log(err);
+            app.get('/user/login',(req, res) =>{
+            res.sendStatus(404);
+            });
+         } 
+         else if (!response) {
+            app.get('/user/login',(req, res) =>{
+            res.sendStatus(401);
+            });
+         } 
+         else {
+            app.get('/user/login',(req, res) =>{
+            var token=jwt.sign({id:user.id}, "secret");
+            res.json(token);
+            console.log(token);
+            });
+         }
+            
+
+      })
+})
+})
 
 
    sequelize
