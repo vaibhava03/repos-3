@@ -54,6 +54,16 @@
         axios.get('http://localhost:3000/user/login')
         .then(req =>{
             console.log(req);
+            if(req.data)
+            {
+                const submit=document.getElementById("submit");
+                const a=document.createElement('a');
+                a.href="expenses.html";
+                a.target='_blank';
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+            }
         })
         .catch(err => console.log(err));
     }
