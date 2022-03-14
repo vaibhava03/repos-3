@@ -5,28 +5,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link rel="stylesheet" href="main.css">
+
     <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.0/axios.min.js'></script>
 
 </head>
 <body>
+    <header class="header">
     <h2>Expense Tracker Application</h2>
-
+    </header>
+    <div class="div1">
     <form id="Form">
-
      <label for="email">Email:</label>
     <input type="email" id="email"><br>
     <label for="password" id="password">Password</label>
     <input type="password" id="Pwd" ><br>
-    <input type="submit" id='submit' style="
-    width: 13%;
-    background: rgb(46, 49, 87);
-    color: rgb(230, 210, 210);
-    border-radius: 5px;
-    margin:20px;" value="LOGIN" style="font-size:larger;"> 
+    <input type="submit" id='submit'value="LOGIN"> 
     </form>
+    <div class="sign-up">
     <h4>A new user? </h4>
-     <a href="signup.html" style="text-decoration:none"> sign-up here</a>
+     <a href="signup.html"> sign-up here</a>
+    </div>
+    </div>
      <script>
+             const myForm = document.getElementById("Form");
+
     myForm.addEventListener('submit',onSubmit);
     function onSubmit(e)
     {
@@ -42,8 +45,16 @@
         email: emailId,
         password:password
         }
-        axios.post('http://localhost:3000/loginusers', myObj)
-        .then()
+        axios.post('http://localhost:3000/user/signup', myObj)
+        .then(res =>{
+            console.log(res.status);
+        })
+        .catch(err => console.log(err));
+
+        axios.get('http://localhost:3000/user/signup')
+        .then(req =>{
+            console.log(req);
+        })
         .catch(err => console.log(err));
     }
                 </script>
