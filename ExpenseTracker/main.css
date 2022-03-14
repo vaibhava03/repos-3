@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Rye&display=swap');
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0; 
+}
+
+ body{
+    justify-content: center;
+
+ } 
+.header{
+    background-color: rgb(73, 50, 7);
+    text-align: center;
+    width:100%;
+    color:white;
+    border-bottom:0.1rem solid white;
+    font-family: rye;
+    background-image: linear-gradient(to bottom right, rgb(153, 5, 49), rgb(20, 125, 133));
+
+}
+.div1{
+width:500px;
+height:fit-content;
+border: 2px solid black;
+background-color:rgb(241, 223, 188);
+border-radius: 20px;
+margin: 15% auto;
+justify-content: center;
+box-shadow: 20px 20px 20px rgb(109, 101, 84);
+
+}
+#Form{
+    padding:15px;
+    color:rgb(80, 42, 16);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+input{
+    width:100%;
+    border-radius:10px;
+    border-width: 3px;
+    padding:6px;
+}
+#submit{
+    width: 60%;
+    background: rgb(46, 49, 87);
+    color: white;
+    border-radius:70px;
+    margin-top:10px;
+    margin-left:19%;
+    font-size:larger;
+}
+.sign-up{
+padding:5px;
+margin-left:20%;
+font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+a{
+    text-decoration:none;
+    color: rgb(29, 16, 145);
+  }
+  
+  a:hover {
+    color: rgb(0, 136, 34);
+  }
