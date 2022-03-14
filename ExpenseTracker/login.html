@@ -45,13 +45,13 @@
         email: emailId,
         password:password
         }
-        axios.post('http://localhost:3000/user/signup', myObj)
+        axios.post('http://localhost:3000/user/login', myObj)
         .then(res =>{
             console.log(res.status);
         })
         .catch(err => console.log(err));
 
-        axios.get('http://localhost:3000/user/signup')
+        axios.get('http://localhost:3000/user/login')
         .then(req =>{
             console.log(req);
         })
