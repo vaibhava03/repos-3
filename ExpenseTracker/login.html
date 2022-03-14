@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.0/axios.min.js'></script>
+
+</head>
+<body>
+    <h2>Expense Tracker Application</h2>
+
+    <form id="Form">
+
+     <label for="email">Email:</label>
+    <input type="email" id="email"><br>
+    <label for="password" id="password">Password</label>
+    <input type="password" id="Pwd" ><br>
+    <input type="submit" id='submit' style="
+    width: 13%;
+    background: rgb(46, 49, 87);
+    color: rgb(230, 210, 210);
+    border-radius: 5px;
+    margin:20px;" value="LOGIN" style="font-size:larger;"> 
+    </form>
+    <h4>A new user? </h4>
+     <a href="signup.html" style="text-decoration:none"> sign-up here</a>
+     <script>
+    myForm.addEventListener('submit',onSubmit);
+    function onSubmit(e)
+    {
+        e.preventDefault();
+        const input = document.getElementById("Pwd");
+        if (input.getAttribute("type") === "password") {
+        input.setAttribute("type", "text");
+        } 
+        const emailId = document.getElementById("email").value;
+        const password=document.getElementById("Pwd").value;
+              
+        const myObj = {
+        email: emailId,
+        password:password
+        }
+        axios.post('http://localhost:3000/loginusers', myObj)
+        .then()
+        .catch(err => console.log(err));
+    }
+                </script>
+          </body>
+          </html>
