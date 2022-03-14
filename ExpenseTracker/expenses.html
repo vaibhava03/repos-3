@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DailyExpenses</title>
+    <link rel="stylesheet" href="main.css">
+
+</head>
+<body>
+    <header class="header">
+        <h2>Expense Tracker Application</h2>
+        </header>
+    <div class="expense_div1">
+        <h3>Daily Expenses</h3>
+    <form id="expenseForm">
+        <label for="Mspent" >Money Spent</label>
+        <input type="number" id="Mspent" name="Mspent"><br>
+        <label for="description">Description of Expense</label>
+        <textarea id="description" name="descrpition" rows="4" cols="40" style="resize:none"></textarea><br>      
+             <label for="category">Select Category</label>
+        <select name="category" id="category">
+            <option value="food">Food</option>
+            <option value="health">Health</option>
+            <option value="transport">Transport</option>
+            <option value="utilities">Utilities</option>
+            <option value="insurance">Insurance</option>
+            <option value="clothing">Clothing</option>
+            <option value="others">Others</option>
+        </select>
+        <input type="submit" id='submit'value="SUBMIT"> 
+    </form>
+</div>
+</body>
+</html>
