@@ -10,10 +10,17 @@
 
 
 </head>
-<body>
+<body class="body">
     <header class="header">
         <h2>Expense Tracker Application</h2>
         </header>
+        <div class="premium_div">
+            <h4>Premium Membership</h4>
+        <ul>
+            <li>get dark theme</li>
+        </ul>
+            <button class="premiumBtn" id="premiumBtn">BUY NOW</button>
+        </div>
     <div class="expense_div1">
         <h3>Daily Expenses</h3>
     <form id="expenseForm">
@@ -34,9 +41,11 @@
         <input type="submit" id='submit'value="ADD EXPENSES"> 
     </form>
 </div>
+
 <script>
 
     const myForm =document.getElementById('expenseForm');
+    const premiumBtn=document.getElementById('premiumBtn');
     myForm.addEventListener('submit', (e) =>{
        e.preventDefault();
        const money=document.getElementById("Mspent").value;
@@ -53,7 +62,6 @@
               'Authorization':token
           }
       }
-    
       console.log(myObj);
        axios.post("http://localhost:3000/user/expense", myObj, head)
        .then(res =>{
@@ -61,6 +69,20 @@
        })
        .catch(err => console.log(err));
     })
+    premiumBtn.addEventListener('click', (e) =>{
+        const a=document.createElement('a');
+                a.href="razorpay.html";
+                a.target='_blank';
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+    })
+    const order=localStorage.getItem("orderId");
+    if(order)
+    {
+        console.log(order);
+        document.body.className="darkmode";
+    }
 </script>
 </body>
 </html>
