@@ -10,6 +10,9 @@
    const cors=require('cors');
    const bcrypt = require('bcrypt');
    const jwt = require('jsonwebtoken');
+   const Order=require('./models/order');
+   const Razorpay=require('razorpay');
+   const instance = new Razorpay({ key_id: 'rzp_test_PEFKbA3GQ0O6x9', key_secret: 'iadpASiQ052e0z1SuvrFSTlR' });
 
 
    app.use(cors());
@@ -17,8 +20,14 @@
 
    User.hasMany(Expense);
    Expense.belongsTo(User);
+   User.hasMany(Order);
+   Order.belongsTo(User);
 
-
+   function parseJwt(token) {
+      var base64Payload = token.split('.')[1];
+      let payload = Buffer.from(base64Payload, 'base64');
+      return JSON.parse(payload.toString());
+    }
 
    app.post('/user/signup', (req, res) =>{
       console.log(req.body);
@@ -93,11 +102,7 @@ app.post('/user/login', (req, res) =>{
 })
 
 app.post('/user/expense', (req, res) =>{
-   function parseJwt(token) {
-      var base64Payload = token.split('.')[1];
-      let payload = Buffer.from(base64Payload, 'base64');
-      return JSON.parse(payload.toString());
-    }
+ 
     let payload= parseJwt(req.headers.authorization);
     User.findByPk(payload.id)
     .then(user =>{
@@ -113,6 +118,34 @@ app.post('/user/expense', (req, res) =>{
     })
     .catch(err => console.log(err));
 })
+
+app.post('/user/pay',(req, res) =>{
+ let payload= parseJwt(req.headers.authorization);
+res.sendStatus(200);
+   instance.orders.create({  
+      "amount":req.body.amount,
+      "currency":"INR",
+      "receipt":"recp1"
+   },
+   (err, order)=>{
+   if(!err){
+      User.findByPk(payload.id)
+      .then(user =>{
+         user.createOrder({orderid:order.id});
+      });
+      app.get('/user/pay', (req, res) =>{
+         const obj={
+         "orderId":order.id,
+         "keyId":instance.key_id
+         }
+      res.json(obj);
+   })
+   }
+      else console.log(err);
+   });
+
+   });
+
 
    sequelize
     .sync()
