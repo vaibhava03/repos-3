@@ -96,7 +96,6 @@ app.post('/user/expense', (req, res) =>{
    function parseJwt(token) {
       var base64Payload = token.split('.')[1];
       let payload = Buffer.from(base64Payload, 'base64');
-      console.log("P",payload);
       return JSON.parse(payload.toString());
     }
     let payload= parseJwt(req.headers.authorization);
