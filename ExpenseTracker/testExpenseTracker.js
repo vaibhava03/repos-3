@@ -1,54 +1,33 @@
    const path=require('path');
    const express=require('express');
    const app=express();
-   const bodyParser=require('body-parser');
-   const cors=require('cors');
-   const Sequelize= require('sequelize');
-   const bcrypt = require('bcrypt');
    const dotenv=require('dotenv');
-   const jwt = require('jsonwebtoken');
    dotenv.config({ path: path.resolve(__dirname, 'util/.env') })
+   const bodyParser=require('body-parser');
+   const sequelize=require('./util/database');
+   const Expense=require('./models/expense');
+   const User=require('./models/user');
+   const cors=require('cors');
+   const bcrypt = require('bcrypt');
+   const jwt = require('jsonwebtoken');
+
 
    app.use(cors());
-   app.use(bodyParser.urlencoded({extended:false}));
    app.use(bodyParser.json());
 
-   const sequelize=new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME,process.env.DB_PASSWORD, {
-    dialect:'mysql', 
-    host:process.env.DB_HOST,
-});
+   User.hasMany(Expense);
+   Expense.belongsTo(User);
 
-
-   const User=sequelize.define('user',{
-      id:
-      {
-          type: Sequelize.INTEGER,
-          autoIncrement: true,
-          allowNull: false,
-          primaryKey:true
-      },
-          name:Sequelize.STRING,
-          email:{
-             type:Sequelize.STRING,
-             unique:true
-            },
-          phone:{
-             type:Sequelize.STRING,
-             unique:true
-            },
-          password:Sequelize.STRING
-      }
-);
 
 
    app.post('/user/signup', (req, res) =>{
+      console.log(req.body);
       User.findOne({where:{email:req.body.email}})
       .then(user =>{
          if(!user){
             return  User.findOne({where:{phone:req.body.phone}})
          }
          else {
-
             app.get('/user/signup', (req, res) =>{
             res.json(false);
             });
@@ -61,32 +40,31 @@
          }
          else {
             app.get('/user/signup', (req, res) =>{
-               res.json(false);
-            })
+            res.json(false);
+         })
             return null;
          }
       })
       .then(salt =>{
          if(salt){
-         bcrypt.hash(req.body.password, salt).then(hash =>{
-         User.create({
-         name:req.body.name,
-         email:req.body.email,
-         phone:req.body.phone,
-         password:hash
+            bcrypt.hash(req.body.password, salt).then(hash =>{
+            User.create({
+            name:req.body.name,
+            email:req.body.email,
+            phone:req.body.phone,
+            password:hash
          })
          })
          app.get('/user/signup',(req, res) =>{
-            res.json(true);
+         res.json(true);
          })
-      }
-      else 
-      {
-         console.log(false);
-      }
+         }
+         else 
+         {
+            console.log(false);
+         }
    });
 });
-
 
 app.post('/user/login', (req, res) =>{
    User.findOne({where:{email:req.body.email}})
@@ -110,15 +88,38 @@ app.post('/user/login', (req, res) =>{
             console.log(token);
             });
          }
-            
-
       })
 })
 })
 
+app.post('/user/expense', (req, res) =>{
+   function parseJwt(token) {
+      var base64Payload = token.split('.')[1];
+      let payload = Buffer.from(base64Payload, 'base64');
+      console.log("P",payload);
+      return JSON.parse(payload.toString());
+    }
+    let payload= parseJwt(req.headers.authorization);
+    User.findByPk(payload.id)
+    .then(user =>{
+       if(user)
+       {
+          user.createExpense({
+            MoneySpent:req.body.money,
+            Description:req.body.description,
+            Category:req.body.category,
+            userId:payload.id
+         });
+       }
+    })
+    .catch(err => console.log(err));
+})
 
    sequelize
     .sync()
+    .then(() =>{
+    })
     .catch(err => console.log(err));
 
-   app.listen(3000);
+    app.listen(3000);
+
