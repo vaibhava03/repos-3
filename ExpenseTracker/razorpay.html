@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Razor Pay</title>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.0/axios.min.js'></script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+</head>
+<body class="body">
+    <h4> click the button to pay the amount of RS.120\- </h4>
+    <button id="pay">PROCEED & PAY</button>
+    <script>
+        const btn=document.getElementById("pay");
+        btn.addEventListener('click', (e) =>{
+            e.preventDefault();
+            const token=localStorage.getItem('token');
+
+            const ord={
+                amount:120
+            }
+            const head={
+          headers:{
+              'Authorization':token
+          }
+        }
+            axios.post('http://localhost:3000/user/pay', ord, head)
+            .then()
+            .catch(err => console.log(err));
+            setTimeout(()=>{
+            axios.get('http://localhost:3000/user/pay')
+            .then(res =>{
+            console.log(res);
+            localStorage.setItem('orderId',res.data.orderId);
+            if(res.status===200){
+            document.body.innerHTML= document.body.innerHTML+'<h4>payment successfull</h4><a href="expenses.html">go back</a>';
+        }
+        })
+        .catch(err =>{
+            document.body.innerHTML= document.body.innerHTML+'<h4>Transaction failed</h4><a href="razorpay.html">Try Again</a>';
+            console.log(err);
+        })
+        },1000);
+
+        })
+        
+
+    </script>
+</body>
+</html>
