@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DailyExpenses</title>
     <link rel="stylesheet" href="main.css">
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.0/axios.min.js'></script>
+
 
 </head>
 <body>
@@ -19,7 +21,7 @@
         <input type="number" id="Mspent" name="Mspent"><br>
         <label for="description">Description of Expense</label>
         <textarea id="description" name="descrpition" rows="4" cols="40" style="resize:none"></textarea><br>      
-             <label for="category">Select Category</label>
+        <label for="category">Select Category</label>
         <select name="category" id="category">
             <option value="food">Food</option>
             <option value="health">Health</option>
@@ -29,8 +31,36 @@
             <option value="clothing">Clothing</option>
             <option value="others">Others</option>
         </select>
-        <input type="submit" id='submit'value="SUBMIT"> 
+        <input type="submit" id='submit'value="ADD EXPENSES"> 
     </form>
 </div>
+<script>
+
+    const myForm =document.getElementById('expenseForm');
+    myForm.addEventListener('submit', (e) =>{
+       e.preventDefault();
+       const money=document.getElementById("Mspent").value;
+       const description=document.getElementById("description").value;
+       const category=document.getElementById("category").value;
+       const token=localStorage.getItem('token');
+      const myObj={
+          money:money,
+          description:description,
+          category:category 
+      }
+      const head={
+          headers:{
+              'Authorization':token
+          }
+      }
+    
+      console.log(myObj);
+       axios.post("http://localhost:3000/user/expense", myObj, head)
+       .then(res =>{
+           console.log(res);
+       })
+       .catch(err => console.log(err));
+    })
+</script>
 </body>
 </html>
