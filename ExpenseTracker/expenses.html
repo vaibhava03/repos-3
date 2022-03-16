@@ -14,20 +14,24 @@
     <header class="header">
         <h2>Expense Tracker Application</h2>
         </header>
+        <section id="section"></section>
+
         <div class="premium_div">
+            <div class="PText">
             <h4>Premium Membership</h4>
+        </div>
         <ul>
             <li>get dark theme</li>
         </ul>
             <button class="premiumBtn" id="premiumBtn">BUY NOW</button>
         </div>
-    <div class="expense_div1">
+    <div class="div1">
         <h3>Daily Expenses</h3>
     <form id="expenseForm">
         <label for="Mspent" >Money Spent</label>
         <input type="number" id="Mspent" name="Mspent"><br>
         <label for="description">Description of Expense</label>
-        <textarea id="description" name="descrpition" rows="4" cols="40" style="resize:none"></textarea><br>      
+        <textarea id="description" name="descrpition" ></textarea><br>      
         <label for="category">Select Category</label>
         <select name="category" id="category">
             <option value="food">Food</option>
@@ -79,9 +83,43 @@
     })
     const order=localStorage.getItem("orderId");
     if(order)
-    {
+    { 
         console.log(order);
-        document.body.className="darkmode";
+        const leaderB=document.createElement('div');
+        leaderB.className='leaderB';
+        const LBHead=document.createElement('h3');
+        LBHead.id="LBHead";
+        LBHead.innerText="LeaderBoard";
+        const section=document.getElementById('section');
+
+        section.appendChild(LBHead);
+        document.body.appendChild(leaderB);
+        axios.get('http://localhost:3000/user/leaderboard')
+        .then(res =>{
+            for(var i=0;i<res.data.length;i++)
+            {
+                leaderB.innerHTML= leaderB.innerHTML+`<h6 class="user">${i+1} ${res.data[i].userName}</h5><div class="HExpense" id=${i} ><h5>--${(res.data[i].expenses)*120}</h6></div>`;
+            }
+        })
+        .catch(err => console.log(err));
+         section.appendChild(leaderB);
+
+         leaderB.addEventListener('click', (e) =>{
+            console.log(e.target.parentNode.className);
+            if(e.target.nextElementSibling.className==="HExpense")
+            {
+             const HExpense=e.target.nextElementSibling;
+             HExpense.style.display="block";
+            }
+         })
+         leaderB.addEventListener('mouseover', (e) =>{
+            if(e.target.nextElementSibling.className==="HExpense")
+            {
+             const HExpense=e.target.nextElementSibling;
+             HExpense.style.display="none";
+            }
+         })
+
     }
 </script>
 </body>
