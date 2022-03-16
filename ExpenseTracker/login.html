@@ -10,21 +10,22 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.0/axios.min.js'></script>
 
 </head>
-<body>
+<body class="body">
     <header class="header">
     <h2>Expense Tracker Application</h2>
     </header>
     <div class="div1">
     <form id="Form">
-     <label for="email">Email:</label>
+     <label for="email">Email:</label><br>
     <input type="email" id="email"><br>
-    <label for="password" id="password">Password</label>
+    <label for="password" id="password">Password:</label><br>
     <input type="password" id="Pwd" ><br>
-    <input type="submit" id='submit'value="LOGIN"> 
+    <input type="submit" id='submit'value="LOGIN"> <br>
     </form>
     <div class="sign-up">
+    <a href="forgetPass.html" id="forgetP">Forget Password?</a><br>
     <h4>A new user? </h4>
-     <a href="signup.html"> sign-up here</a>
+    <a href="signup.html"> sign-up here</a><br>
     </div>
     </div>
      <script>
@@ -36,11 +37,10 @@
         e.preventDefault();
         const input = document.getElementById("Pwd");
         if (input.getAttribute("type") === "password") {
-        input.setAttribute("type", "text");
+        const p=input.value;
         } 
         const emailId = document.getElementById("email").value;
-        const password=document.getElementById("Pwd").value;
-              
+        const password=input.value;
         const myObj = {
         email: emailId,
         password:password
@@ -53,9 +53,10 @@
 
         axios.get('http://localhost:3000/user/login')
         .then(req =>{
-            console.log(req);
+            console.log(req.headers);
             if(req.data)
             {
+                localStorage.setItem('token',req.data);
                 const submit=document.getElementById("submit");
                 const a=document.createElement('a');
                 a.href="expenses.html";
@@ -67,6 +68,7 @@
         })
         .catch(err => console.log(err));
     }
+
                 </script>
           </body>
           </html>
