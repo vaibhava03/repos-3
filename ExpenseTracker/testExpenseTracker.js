@@ -173,6 +173,9 @@ app.get('/user/leaderboard', (req, res) =>{
 },500);
 })
 
+app.post('/user/password/forgotpassword',(req, res) =>{
+console.log(req.body.email);
+})
 
    sequelize
     .sync()
