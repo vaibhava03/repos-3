@@ -14,7 +14,10 @@
    const Razorpay=require('razorpay');
 const { default: axios } = require('axios');
    const instance = new Razorpay({ key_id: 'rzp_test_PEFKbA3GQ0O6x9', key_secret: 'iadpASiQ052e0z1SuvrFSTlR' });
-
+   const sgMail = require('@sendgrid/mail');
+const { getMaxListeners } = require('process');
+const { create } = require('domain');
+   sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
    app.use(cors());
    app.use(bodyParser.json());
@@ -173,8 +176,19 @@ app.get('/user/leaderboard', (req, res) =>{
 },500);
 })
 
+
 app.post('/user/password/forgotpassword',(req, res) =>{
-console.log(req.body.email);
+const msg={
+   to:req.body.email,
+   from:"sender@email.com",
+   subject:"create new password",
+   text: "hi create a new password here",
+   html:'<strong>reset password link</strong>',
+}
+sgMail.send(msg)
+.then((response) =>{
+   console.log(response);
+})
 })
 
    sequelize
@@ -184,4 +198,3 @@ console.log(req.body.email);
     .catch(err => console.log(err));
 
     app.listen(3000);
-
