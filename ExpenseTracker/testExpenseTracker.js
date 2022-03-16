@@ -12,6 +12,7 @@
    const jwt = require('jsonwebtoken');
    const Order=require('./models/order');
    const Razorpay=require('razorpay');
+const { default: axios } = require('axios');
    const instance = new Razorpay({ key_id: 'rzp_test_PEFKbA3GQ0O6x9', key_secret: 'iadpASiQ052e0z1SuvrFSTlR' });
 
 
@@ -145,6 +146,32 @@ res.sendStatus(200);
    });
 
    });
+
+
+   const data=[];
+  User.findAll()
+  .then(users =>{
+     users.forEach(user => {
+        Order.findAndCountAll({where:{userId:user.id}})
+        .then(nums =>{
+           if(nums.count>0){
+           const obj={
+              expenses:nums.count,
+              userName:user.name
+           }
+           data.push(obj);
+         }        
+
+        })
+     });
+  })
+
+app.get('/user/leaderboard', (req, res) =>{
+   setTimeout(() =>{
+   res.json(data.sort(function(x,y){return y.expenses-x.expenses}));
+
+},500);
+})
 
 
    sequelize
