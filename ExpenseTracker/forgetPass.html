@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>forget Password</title>
+    <link rel="stylesheet" href="main.css">
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.0/axios.min.js'></script>
+</head>
+<body>
+    <div class="div1">
+        <form id="Form">
+         <label for="email">Email:</label><br>
+        <input type="email" id="email"><br>
+        <input type="submit" id='submit'value="SUBMIT"> <br>
+        </form>
+        <script>
+            const myForm = document.getElementById("Form");
+             myForm.addEventListener('submit',onSubmit);
+    function onSubmit(e)
+    {
+        e.preventDefault();
+        const emailId = document.getElementById("email").value;
+        const myObj = {
+        email: emailId
+        }
+        axios.post('http://localhost:3000/user/password/forgotpassword',myObj)
+        .then(res =>{
+            if(res.status===200)
+            {
+                console.log("success");
+            }
+        })
+        .catch(err => console.log(err));
+
+    }
+        </script>
+</body>
+</html>
