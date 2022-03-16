@@ -6,7 +6,7 @@
     padding: 0; 
 }
 
- body{
+ .body{
     justify-content: center;
 
  } 
@@ -14,6 +14,7 @@
     background-color: rgb(73, 50, 7);
     text-align: center;
     width:100%;
+    height:50px;
     color:white;
     border-bottom:0.1rem solid white;
     font-family: rye;
@@ -21,28 +22,30 @@
 
 }
 .div1{
-width:500px;
-height:fit-content;
-border: 2px solid black;
-background-color:rgb(241, 223, 188);
-border-radius: 20px;
-margin: 15% auto;
-justify-content: center;
-box-shadow: 20px 20px 20px rgb(109, 101, 84);
-
+    width:37%;
+    height:fit-content;
+    background-color: bisque;
+    border: 2px solid black;
+    border-radius: 20px;
+    box-shadow: 2px 2px 2px rgb(148, 143, 143);
+    margin: 0 auto;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
+
 #Form{
     padding:15px;
     color:rgb(80, 42, 16);
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
+
 input{
-    width:100%;
+    width:50%;
     border-radius:10px;
     border-width: 3px;
     padding:6px;
-    margin-bottom: 10px;
+    margin-bottom: 17px;
 }
+
 #submit{
     width: 60%;
     background: rgb(46, 49, 87);
@@ -51,7 +54,9 @@ input{
     margin-top:10px;
     margin-left:19%;
     font-size:larger;
+    cursor: pointer;
 }
+/* ----------------------------------sign-up&&login-------------------------------- */
 .sign-up{
 padding:5px;
 margin-left:20%;
@@ -66,26 +71,18 @@ a{
   a:hover {
     color: rgb(0, 136, 34);
   }
-  .expense_div1{
-width:400px;
-height:300px;
-background-color: bisque;
-border: 2px solid black;
-border-radius: 20px;
-box-shadow: 2px 2px 2px rgb(148, 143, 143);
-margin: 5% auto;
-
-font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  }
-
- #expenseForm{
-    padding:15px;
- }
+/* -----------------------------------Expense------------------------------------ */
+#description{
+    width:90%;
+    height:80px;
+    resize: none;
+    }
  select{
      background-color: rgb(235, 184, 90);
      padding:5px;
      border-radius: 5px;
-     color:darkolivegreen
+     color:rgb(0, 0, 0);
+     font-weight:700;
  }
  select:hover{
      background-color: azure;
@@ -97,3 +94,73 @@ font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
      font-family: rye;
      color:rgb(80, 35, 35);
  }
+
+ .premium_div{
+     position:fixed;
+    right:5%;
+    margin-top:-9%;
+    margin-right:-3%;
+    background-color:rgb(33, 57, 105);
+    width:auto;
+    height:auto;
+     }
+
+h4{
+color:white;
+font-family: 'Times New Roman', Times, serif;
+font-size: 20px;
+}
+
+.PText{
+    border: 1px solid white;
+}
+
+.premiumBtn{
+background-color: rgb(55, 131, 238);
+width:100%;
+border-radius: 5px;
+font-size: 20px;
+font-weight: bold;
+color:white;
+font-family:Arial, Helvetica, sans-serif;
+}
+
+ul{
+    padding:17px;
+    list-style:square;
+    color:rgb(200, 201, 202);
+}
+
+.darkmode{
+    background-color: rgb(12, 10, 10);
+}
+#section{
+    top:0px;
+    height:auto;
+    width:250px;
+margin-left:20px;
+}
+.leaderB
+{
+background-color: rgb(142, 196, 129);
+border:4px ridge rgb(31, 23, 23);
+border-radius: 10px;
+padding-bottom:9px;
+
+}
+li{
+    list-style:none;
+    color:white;
+}
+.user{
+    color:white;
+    padding:10px;
+    font-size: 20px;
+    cursor:pointer;
+    padding:9px;
+}
+.HExpense{
+    display:none;
+    padding:9px;
+    color:white;
+}
