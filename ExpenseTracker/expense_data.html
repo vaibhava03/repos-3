@@ -12,7 +12,10 @@
     <header class="header">
         <h4>DAY TO DAY EXPENSES</h4>
     </header>
-    <div class="D_button"><button id="btn">⤓</button> </div>
+    <div class="D_button" id="f_div">
+        <button id="prev">see previous files</button>
+        <button id="btn">download</button>
+     </div>
 
     <div class="duration" id="duration">
        <button id="daily">Daily</button>
@@ -21,20 +24,17 @@
     </div>
     <div id="day-to-day-expenses"></div>
 <script>
-    const duration=document.getElementById('duration');
-    duration.addEventListener('click',(e)=>{
-
-    const div=document.getElementById('day-to-day-expenses')
-    div.innerHTML='';
-
-    const token=localStorage.getItem('token');
+     const token=localStorage.getItem('token');
     const head={
           headers:{
               'Authorization':token
           }
       }
+    const duration=document.getElementById('duration');
+    duration.addEventListener('click',(e)=>{
 
-
+    const div=document.getElementById('day-to-day-expenses')
+    div.innerHTML='';
     if(e.target.id==='daily'){
     const table=document.createElement('table');
     table.className="table";
@@ -53,7 +53,7 @@
        inner_row.className="row";
        total=total+res.data[i].MoneySpent;
         inner_row.innerHTML=`<td>${res.data[i].Category}</td><td>${res.data[i].Description}</td><td>${res.data[i].MoneySpent}</td>`;
-        table.appendChild(row);
+        table.appendChild(inner_row);
     }
     const sum_rw=document.createElement('tr');
     sum_rw.className="row";
@@ -129,8 +129,45 @@
 })
 
 
+const btn=document.getElementById('btn');
+btn.addEventListener('click',(e) =>{
+    console.log(e.target);
+    const a=document.createElement('a');
+    axios.post('http://localhost:3000/download', head)
+    .then(res =>{
+        a.setAttribute('href',`${res.data.fileUrl}`);
+a.setAttribute('target','_blank');
 
+a.click();
+a.remove();
+    })
+    .catch(err =>console.log(err))
 
+})
+
+const prev=document.getElementById('prev');
+prev.addEventListener('click',() =>{
+    const div=document.getElementById('day-to-day-expenses')
+    div.innerText='';
+    const table=document.createElement('table');
+    table.className="table";
+    table.id="D_table";
+    const row=document.createElement('tr');
+    row.className="row";
+    row.innerHTML=`<th>previous files</th><th>downloaded On</th>`;
+    table.appendChild(row);
+    axios.post('http://localhost:3000/user/prev-files',head)
+    .then(res =>{ console.log(res);
+        for(var i=0;i<res.data.length;i++)
+        {
+        const inner_row=document.createElement('tr');
+       inner_row.className="row";
+        inner_row.innerHTML=`<td><a href=${res.data[i].fileUrl}>download${i+1}</td><td>${res.data[i].createdAt}</td>`;
+        table.appendChild(inner_row);
+        }
+        div.appendChild(table);
+    }).catch(err => console.log(err));
+})
 </script>
 </body>
 </html>
