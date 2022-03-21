@@ -9,7 +9,9 @@ const jwt = require('jsonwebtoken');
 const Razorpay=require('razorpay');
 const { Console } = require('console');
 const instance = new Razorpay({ key_id: 'rzp_test_PEFKbA3GQ0O6x9', key_secret: process.env.SECRET});
-
+const AWS = require('aws-sdk');
+const { url } = require('inspector');
+const FileUrl=require('../models/FileUrl')
 function parseJwt(token) {
     var base64Payload = token.split('.')[1];
     let payload = Buffer.from(base64Payload, 'base64');
@@ -165,3 +167,61 @@ exports.postMonthly=(req, res) =>{
     res.json(Monthly_expense);
     })   
 };
+
+
+
+
+exports.postExpenses= async(req, res) =>{
+    let payload= parseJwt(req.body.headers.Authorization);
+    const expenses=await Expense.findAll({where:{userId:payload.id}})
+    
+    const stringifiedExpenses=JSON.stringify(expenses);
+
+    const filename=`Expense${payload.id}/${new Date()}.txt`;
+    const fileUrl= await uploadToS3(stringifiedExpenses,filename);
+    console.log(fileUrl);
+    await FileUrl.create({userId:payload.id,fileUrl:fileUrl})
+    res.status(200).json({fileUrl, success:true});
+}
+
+function uploadToS3(data, filename){
+let s3bucket=new AWS.S3({
+    accessKeyId:process.env.IAM_USER_KEY,
+    secretAccessKey:process.env.IAM_SECRET,
+});
+    var params={
+        Bucket:process.env.BUCKET_NAME,
+        Key:filename,
+        Body:data, 
+        ACL:"public-read"
+    };
+    return new Promise((resolve, reject) =>{
+        s3bucket.upload(params, (err, s3response) =>{
+            if(err){
+                console.log("something went wrong", err);
+                reject(err);
+            }
+            else {console.log("success",s3response);
+             resolve(s3response.Location);
+        }
+    })
+})
+    }
+
+
+    exports.postPrevFiles=(req, res) =>{
+    let payload= parseJwt(req.body.headers.Authorization);
+    const data=[];
+    FileUrl.findAll({where:{userId:payload.id}})
+    .then(files=>{
+        files.forEach(file => {
+            var updated=file.updatedAt.getDate()+'-'+(file.updatedAt.getMonth()+1)+'-'+file.updatedAt.getFullYear();
+            const arr={
+                fileUrl:file.fileUrl,
+                createdAt:updated
+            }
+            data.push(arr);
+        });
+        res.json(data);
+    })
+    }
