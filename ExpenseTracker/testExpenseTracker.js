@@ -9,6 +9,7 @@
    const Expense=require('./models/expense');
    const Order=require('./models/order');
    const FPReq=require('./models/ForgotPasswordRequests');
+   const FileUrl=require('./models/FileUrl')
    const cors=require('cors');
    app.use(cors());
    app.use(bodyParser.urlencoded({extended:false}));
@@ -25,7 +26,8 @@
    Order.belongsTo(User);
    User.hasMany(FPReq);
    FPReq.belongsTo(User);
-
+   User.hasMany(FileUrl);
+   FileUrl.belongsTo(User);
    sequelize
     .sync()
     .then(() =>{
