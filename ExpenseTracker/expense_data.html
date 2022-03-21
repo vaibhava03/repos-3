@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Total expenses</title>
+    <link rel="stylesheet" href="main.css">
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.0/axios.min.js'></script>
+</head>
+<body>
+    <header class="header">
+        <h4>DAY TO DAY EXPENSES</h4>
+    </header>
+    <div class="D_button"><button id="btn">⤓</button> </div>
+
+    <div class="duration" id="duration">
+       <button id="daily">Daily</button>
+        <button id="weekly">weekly</button>
+        <button id="monthly">Monthly</button>
+    </div>
+    <div id="day-to-day-expenses"></div>
+<script>
+    const duration=document.getElementById('duration');
+    duration.addEventListener('click',(e)=>{
+
+    const div=document.getElementById('day-to-day-expenses')
+    div.innerHTML='';
+
+    const token=localStorage.getItem('token');
+    const head={
+          headers:{
+              'Authorization':token
+          }
+      }
+
+
+    if(e.target.id==='daily'){
+    const table=document.createElement('table');
+    table.className="table";
+    table.id="D_table";
+    const row=document.createElement('tr');
+    row.className="row";
+    row.innerHTML=`<th>Category</th><th>description</th><th>expense</th>`;
+    table.appendChild(row);
+
+    var total=0;
+    axios.post('http://localhost:3000/user/daily-expense', head)
+    .then(res =>{
+    for(var i=0;i<res.data.length;i++)
+    {
+        const inner_row=document.createElement('tr');
+       inner_row.className="row";
+       total=total+res.data[i].MoneySpent;
+        inner_row.innerHTML=`<td>${res.data[i].Category}</td><td>${res.data[i].Description}</td><td>${res.data[i].MoneySpent}</td>`;
+        table.appendChild(row);
+    }
+    const sum_rw=document.createElement('tr');
+    sum_rw.className="row";
+    sum_rw.innerHTML=`<td></td><td><h5>total</h5></td><td>${total}</td`;
+    table.appendChild(sum_rw);
+    div.appendChild(table);
+
+ 
+})
+}
+
+
+    if(e.target.id==="weekly"){ 
+    const table=document.createElement('table');
+    table.className="table";
+    table.id="W_table";
+    const row=document.createElement('tr');
+    row.className="row";
+    row.innerHTML=`<th>Category</th><th>expense</th>`;
+    table.appendChild(row);
+
+    var total=0;
+    axios.post('http://localhost:3000/user/weekly-expense', head)
+    .then(res =>{ console.log(res);
+    for(var i=0;i<res.data.length;i++)
+    {
+        const inner_row=document.createElement('tr');
+        inner_row.className="row";
+        total=total+res.data[i].money;
+        inner_row.innerHTML=`<td>${res.data[i].category}</td><td>${res.data[i].money}</td>`;
+        table.appendChild(inner_row);
+    }
+    const sum_rw=document.createElement('tr');
+    sum_rw.className="row";
+    sum_rw.innerHTML=`<td><h5>total</h5></td><td>${total}</td>`;
+    table.appendChild(sum_rw);
+    div.appendChild(table);
+
+
+}).catch(err => console.log(err));
+};
+
+
+    if(e.target.id==='monthly'){ 
+    const table=document.createElement('table');
+    table.className="table";
+    table.id="M_table";
+    const row=document.createElement('tr');
+    row.className="row";
+    row.innerHTML=`<th>Category</th><th>expense</th>`;
+    table.appendChild(row);
+    var total=0;
+    axios.post('http://localhost:3000/user/monthly-expense', head)
+    .then(res =>{ console.log(res);
+    for(var i=0;i<res.data.length;i++)
+    {
+        const inner_row=document.createElement('tr');
+       inner_row.className="row";
+       total=total+res.data[i].money;
+        inner_row.innerHTML=`<td>${res.data[i].category}</td><td>${res.data[i].money}</td>`;
+        table.appendChild(inner_row);
+    }
+    const sum_rw=document.createElement('tr');
+    sum_rw.className="row";
+    sum_rw.innerHTML=`<td><h5>total</h5></td><td>${total}</td>`;
+    table.appendChild(sum_rw);
+    div.appendChild(table);
+
+
+
+}).catch(err => console.log(err));
+}
+})
+
+
+
+
+</script>
+</body>
+</html>
